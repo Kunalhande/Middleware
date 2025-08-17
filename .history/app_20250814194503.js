@@ -30,7 +30,7 @@
 //    res.send("Page not found");
 // })
 
-const checkToken = ("/api", (req,res,next)=>{
+app.use("/api", (req,res,next)=>{
    let{token} = req.query;
    if(token === "giveaccess"){
       next();
