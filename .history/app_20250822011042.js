@@ -53,7 +53,7 @@ app.get("/random", (req,res) =>{
 })
 
 app.use((err, req, res, next)=>{
-   res.send(err);
+   console.log(err);
 })
 
  app.listen(8080,()=>{

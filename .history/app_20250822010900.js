@@ -1,6 +1,6 @@
  const express = require("express");
  const app = express();
- const ExpressError = require("./ExpressError");
+ const ExpressError = require(ExpressError);
 
 
 //  app.use((req,res,next) =>{
@@ -53,7 +53,7 @@ app.get("/random", (req,res) =>{
 })
 
 app.use((err, req, res, next)=>{
-   res.send(err);
+   console.log(err);
 })
 
  app.listen(8080,()=>{

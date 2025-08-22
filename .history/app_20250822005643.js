@@ -1,7 +1,5 @@
  const express = require("express");
  const app = express();
- const ExpressError = require("./ExpressError");
-
 
 //  app.use((req,res,next) =>{
 //     console.log("hi, i am 1st middleware");
@@ -37,7 +35,7 @@ const checkToken = ("/api", (req,res,next)=>{
    if(token === "giveaccess"){
       next();
    }
-   throw new ExpressError(401,"ACCESS DENIED");
+   res.send("ACCESS DENIED");
 })
 
 app.get("/api",(req,res)=>{
@@ -52,8 +50,8 @@ app.get("/random", (req,res) =>{
     res.send("This is a random page");
 })
 
-app.use((err, req, res, next)=>{
-   res.send(err);
+app.use ((err, req, res, next)=>{
+   console.log(err);
 })
 
  app.listen(8080,()=>{
