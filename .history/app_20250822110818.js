@@ -1,10 +1,9 @@
-// ✅ Import express
+// Import express
 const express = require("express");
 const app = express();
 
 // ✅ Custom Error Class
-// This allows us to throw errors with a specific "status" and "message"
-// Example: throw new ExpressError(401, "ACCESS DENIED")
+// This helps us throw errors with a specific "status" and "message"
 class ExpressError extends Error {
    constructor(status, message) {
       super(); // call parent Error constructor
@@ -52,7 +51,6 @@ app.get("/err", (req, res) => {
 });
 
 // ✅ 404 handler (runs if no route matches above)
-// Example: http://localhost:8080/doesnotexist
 app.use((req, res) => {
    res.status(404).send("Page not found");
 });
@@ -60,22 +58,12 @@ app.use((req, res) => {
 // ✅ Global Error Handler
 // This will catch *any error* thrown in the app
 app.use((err, req, res, next) => {
-   // If error is custom (ExpressError), it will have status + message
-   // If it's a system error (like ReferenceError), use defaults
-   let { status = 500 } = err;
-
-   // Show actual error message for debugging
-   // Example: "ReferenceError: abcd is not defined"
-   let message = err.message || "Something went wrong";
-
-   // Optional: log full error stack in server console for debugging
-   console.error("🔥 ERROR STACK:", err.stack);
-
-   // Send the error status + message to client
+   // Default values if not provided
+   let { status = 500, message = "Something went wrong" } = err;
    res.status(status).send(message);
 });
 
 // ✅ Start the server
 app.listen(8080, () => {
-   console.log("✅ Server is listening on port 8080");
+   console.log("server is listening on port 8080");
 });
